@@ -1,9 +1,17 @@
-import { UserProps } from "../interfaces";
 import { prisma } from "../prisma";
 import { AppErrors } from "../errors/AppErrors";
+import { UserProps } from "../interfaces";
+
+export interface UserProps1 {
+  email: string;
+  number: string;
+  cpf: string;
+  address: string;
+  name: string;
+}
 
 export class CreateUser {
-  async create(data: UserProps) {
+  async create(data: UserProps1) {
     const userExistsEmail = await prisma.client.findUnique({
       where: {
         email: data.email,

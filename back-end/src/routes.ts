@@ -23,18 +23,18 @@ routes.use(authMiddleware);
 
 routes.post("/createUser", async (req, res) => {
   try {
-    const { address, cpf, email, id, name, number }: UserProps = req.body;
+    const { address, cpf, email, name, number }: UserProps =
+      req.body.data.client;
     const data = {
       address,
       cpf,
       email,
-      id,
       name,
       number,
     };
 
     const user = new CreateUser();
-    const newUser: any = await user.create(data);
+    const newUser: UserProps = await user.create(data);
 
     return res.json(newUser).status(201).send();
   } catch (err) {
@@ -43,7 +43,8 @@ routes.post("/createUser", async (req, res) => {
 });
 
 routes.post("/attUser", async (req, res) => {
-  const { address, cpf, email, id, name, number }: UserProps = req.body;
+  const { address, cpf, email, id, name, number }: UserProps =
+    req.body.data.client;
   const data = {
     address,
     cpf,
@@ -52,7 +53,6 @@ routes.post("/attUser", async (req, res) => {
     name,
     number,
   };
-
   const user = new AttUser();
   const upUser: any = await user.update(data);
 
@@ -61,7 +61,7 @@ routes.post("/attUser", async (req, res) => {
 
 routes.delete("/deleteUser", async (req, res) => {
   const userId: any = await req.body;
-  const deltedUser = await new DeleteUser().delete(userId.id);
+  const deltedUser = await new DeleteUser().delete(userId.userId);
 
   return res.json(deltedUser).status(201);
 });

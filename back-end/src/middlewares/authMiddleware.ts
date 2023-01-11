@@ -12,12 +12,22 @@ export const authMiddleware = async (
   res: Response,
   next: Function
 ) => {
-  const { authorization } = req.headers;
-  if (!authorization) {
+  const { authorization }: any = req.headers;
+  if (req.body.headers) {
+    var { Authorization } = req.body.headers;
+  }
+
+  let token = "";
+
+  if (!authorization && !Authorization) {
     throw new AppErrors("Sem autorização", 401);
   }
 
-  const token = authorization.split(" ")[1];
+  if (authorization) {
+    token = authorization.split(" ")[1];
+  } else {
+    token = Authorization.split(" ")[1];
+  }
   jwt.verify(token, process.env.JWT_PASS || "", async (err, decoded: any) => {
     if (err)
       return res.status(500).send({ auth: false, message: "Token inválido." });
