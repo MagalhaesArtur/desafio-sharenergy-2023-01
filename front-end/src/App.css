@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  background: #000428; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #004e92,
+    #000428
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #004e92,
+    #000428
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+#form {
+  height: 400px;
+  width: 700px;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8.5px);
+  -webkit-backdrop-filter: blur(8.5px);
+  border-radius: 10px;
+}
+
+.input {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 2rem;
+  width: 250px;
+  height: 3rem;
+  padding: 1rem;
+  border-width: 2px;
+  border-color: transparent;
+  outline: none;
+  font-size: 1rem;
+  font-weight: bold;
+  transition-duration: 200ms;
+  transition-property: all;
+  transition-timing-function: ease-in-out;
+}
+.input:focus {
+  border-width: 2px;
+  border-color: rgb(203 213 225);
+  transition-duration: 200ms;
+  transition-property: all;
+  transition-timing-function: ease-in-out;
+}
+#submitButton {
+  background: linear-gradient(to right, #14163c 0%, #03217b 79%);
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  width: 65%;
+  height: 3rem;
+  border-width: 2px;
+  border-color: transparent;
+  color: white;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition-duration: 200ms;
+  transition-property: all;
+  transition-timing-function: ease-in-out;
+}
+
+#submitButton:hover {
+  transition-duration: 200ms;
+  transition-property: all;
+  transition-timing-function: ease-in-out;
+  border-width: 2px;
+  border-color: rgb(203 213 225);
+}
+
+.input :focus {
+  display: inline-block;
+  box-shadow: 0 0 0 0.2rem #b9abe0;
+  backdrop-filter: blur(12rem);
+  border-radius: 2rem;
+}
+
+.input ::placeholder {
+  color: #b9abe099;
+  font-weight: 100;
+  font-size: 1rem;
+}
