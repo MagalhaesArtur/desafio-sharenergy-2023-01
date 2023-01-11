@@ -9,6 +9,16 @@ import { authMiddleware } from "./middlewares/authMiddleware";
 
 export const routes = express.Router();
 
+routes.post("/login", async (req, res) => {
+  try {
+    console.log(req.body);
+    const user = req.body;
+    const data = await new UserController().Login(user);
+    return res.json(data);
+  } catch (error) {
+    return res.status(400).json({ error });
+  }
+});
 routes.use(authMiddleware);
 
 routes.post("/createUser", async (req, res) => {
@@ -59,14 +69,4 @@ routes.delete("/deleteUser", async (req, res) => {
 routes.get("/getUsers", async (req, res) => {
   const users = await new GetUsers().get();
   return res.json(users).status(201);
-});
-
-routes.post("/login", async (req, res) => {
-  try {
-    const user = req.body;
-    const data = await new UserController().Login(user);
-    return res.json(data);
-  } catch (error) {
-    return res.status(400).json({ error });
-  }
 });

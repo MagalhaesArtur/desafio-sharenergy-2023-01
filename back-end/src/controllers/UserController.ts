@@ -12,7 +12,7 @@ export class UserController {
       },
     });
     if (!userExistsLogin) {
-      throw new AppErrors("Username ou senha não existem", 400);
+      throw new AppErrors("Login ou Senha inválidos!", 400);
     }
     const verifyPass = await bcrypt.compare(
       data.password,
@@ -29,7 +29,7 @@ export class UserController {
       const { password, ...user } = userExistsLogin;
       return { user, token };
     } else {
-      throw new AppErrors("Username ou senha não existem", 400);
+      throw new AppErrors("Login ou Senha inválidos!", 400);
     }
   }
 }

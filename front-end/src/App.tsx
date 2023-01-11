@@ -4,14 +4,14 @@ import "./App.css";
 import "./main.css";
 
 import Login from "./components/Login/Login";
-import Users from "./components/Users/Users";
+import Clients from "./components/Users/Clients";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/users" element={<Users />} />
+        <Route path="/clients" element={<Clients />} />
       </Routes>
     </Router>
   );

@@ -1,16 +1,37 @@
 import { FormEvent, useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
 import { blue, pink } from "@mui/material/colors";
+import { LoginApi } from "../../utils/api";
+import { useNavigate } from "react-router-dom";
+import { Loading } from "../Loading";
 
 function Login() {
+  let navigate = useNavigate();
   const [username, setUsername] = useState("");
+
+  const [isLoginError, setIsLoginError] = useState(false);
+  const [MessageError, setMessageError] = useState("");
+
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-  function handleSubmit(event: FormEvent) {
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     // Faz o login aqui
-    console.log(`Logging in ${username}`);
-    console.log(`Remember me: ${rememberMe}`);
+    const res = await LoginApi(username, password);
+    if (typeof res == "string") {
+      setLoading(false);
+      setIsLoginError(true);
+      setMessageError(res);
+      setTimeout(() => {
+        setIsLoginError(false);
+      }, 4000);
+    } else {
+      localStorage.setItem("token", res.token);
+      setLoading(false);
+      navigate("/clients");
+    }
   }
 
   console.log(rememberMe);
@@ -26,7 +47,9 @@ function Login() {
           <label>
             <input
               required
-              className="input"
+              className={`input ${
+                isLoginError ? "!border-red-500 !border-[1px]" : null
+              }`}
               placeholder="Username"
               type="text"
               value={username}
@@ -37,7 +60,9 @@ function Login() {
           <label>
             <input
               required
-              className="input"
+              className={`input ${
+                isLoginError ? "!border-red-600 !border-[1px]" : null
+              }`}
               placeholder="Password"
               type="password"
               value={password}
@@ -45,7 +70,11 @@ function Login() {
             />
           </label>
           <br />
-          <div className="flex items-center w-[250px] justify-start">
+          {isLoginError ? (
+            <h1 className="text-lg text-red-700 font-bold">{MessageError}</h1>
+          ) : null}
+
+          <div className="flex items-center mt-5 w-[250px] justify-start">
             <Checkbox
               defaultChecked
               sx={{
@@ -64,8 +93,14 @@ function Login() {
             </label>
           </div>
           <br />
-          <button id="submitButton" type="submit">
-            Sing Up
+          <button
+            onClick={() => {
+              setLoading(true);
+            }}
+            id="submitButton"
+            type="submit"
+          >
+            {loading ? <Loading size={30} /> : "Sing Up"}
           </button>
         </form>
       </div>
