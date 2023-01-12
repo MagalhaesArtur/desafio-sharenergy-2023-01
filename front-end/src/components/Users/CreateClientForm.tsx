@@ -56,6 +56,7 @@ function CreateClientForm(props: {
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     setLoading(true);
+
     let createdClient = await CreateUser({ address, cpf, email, name, number });
 
     if (typeof createdClient == "string") {
@@ -91,7 +92,9 @@ function CreateClientForm(props: {
             mask="999.999.999-99"
             required
             className={` ${
-              CPFErr ? "!border-red-500 !border-[1px]" : null
+              CPFErr && cpf != "___.___.___-__" && cpf != ""
+                ? "!border-red-500 !border-[1px]"
+                : null
             } input1 !shadow-md focus:border-green-500 w-[70%]`}
             type="text"
             value={cpf}
@@ -101,9 +104,13 @@ function CreateClientForm(props: {
             }}
           />
         </div>
-        {CPFErr ? (
+        {CPFErr && cpf != "___.___.___-__" && cpf != "" ? (
           <h1 className="text-lg m-auto mt-2 text-red-700 font-bold">
             CPF inválido{" "}
+          </h1>
+        ) : cpf == "" ? (
+          <h1 className="text-lg m-auto mt-2 text-red-700 font-bold">
+            CPF obrigatório{" "}
           </h1>
         ) : null}
         {isLoginErrorCPF ? (
@@ -160,7 +167,9 @@ function CreateClientForm(props: {
             mask="(99)99999-9999"
             required
             className={`input1 !shadow-md ${
-              numErr ? "!border-red-500 !border-[1px]" : null
+              numErr && number != "(__)_____-____" && number != ""
+                ? "!border-red-500 !border-[1px]"
+                : null
             } focus:border-green-500 w-[70%]`}
             type="tel"
             value={number}
@@ -170,9 +179,13 @@ function CreateClientForm(props: {
             }}
           />
         </div>
-        {numErr ? (
+        {numErr && number != "(__)_____-____" && number != "" ? (
           <h1 className="text-lg m-auto mt-2 text-red-700 font-bold">
             Telefone inválido{" "}
+          </h1>
+        ) : number == "" && numErr ? (
+          <h1 className="text-lg m-auto mt-2 text-red-700 font-bold">
+            Telefone obrigatório{" "}
           </h1>
         ) : null}
       </label>
@@ -191,7 +204,16 @@ function CreateClientForm(props: {
       <button
         disabled={emailErr || CPFErr || numErr}
         onClick={() => {
-          setLoading(true);
+          if (
+            address != "" &&
+            cpf != "" &&
+            email != "" &&
+            name != "" &&
+            number != ""
+          ) {
+            setLoading(true);
+          } else {
+          }
         }}
         id="submitButton"
         className="hover:!border-green-600"

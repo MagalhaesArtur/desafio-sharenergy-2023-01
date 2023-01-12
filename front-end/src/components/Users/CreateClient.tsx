@@ -14,7 +14,14 @@ const CreateClient = (props: {
     <div>
       <Dialog.Root open={props.isDialogCreateClientOpen}>
         <Dialog.Portal>
-          <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
+          <Dialog.Overlay
+            onClick={() => {
+              props.setIsDialogCreateClientOpen(
+                !props.isDialogCreateClientOpen
+              );
+            }}
+            className="bg-black/60 inset-0 fixed"
+          />
           <Dialog.Content className="fixed   bg-[#d0d3d4] py-8 px-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  text-[#14163c] rounded-lg w-[600px] shadow-lg shadow-black/40">
             <X
               className="absolute cursor-pointer right-4 top-4"

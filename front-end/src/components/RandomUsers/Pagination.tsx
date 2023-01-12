@@ -1,0 +1,33 @@
+import { CircleNotch } from "phosphor-react";
+
+export function Pagination(props: {
+  currentPage: number;
+  postsPerPage: number;
+  totalPosts: number;
+  paginate: Function;
+}) {
+  const pageNumbers = [];
+
+  for (let i = 1; i <= Math.ceil(props.totalPosts / props.postsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+  return (
+    <nav className="w-[60%]">
+      <ul className="w-[100%] flex justify-center">
+        {pageNumbers.map((page) => (
+          <li
+            className={`${
+              props.currentPage == page ? "bg-blue-700 text-white" : "bg-white"
+            }  flex justify-center items-center  w-12 h-10 border-x-[1px] border-gray-400`}
+            key={page}
+            onClick={() => {
+              props.paginate(page);
+            }}
+          >
+            {page}
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
