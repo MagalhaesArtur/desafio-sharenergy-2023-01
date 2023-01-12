@@ -21,6 +21,14 @@ routes.post("/login", async (req, res) => {
 });
 routes.use(authMiddleware);
 
+routes.get("/auth", async (req, res) => {
+  try {
+    return res.json({ message: "ok" });
+  } catch (error) {
+    return res.status(400).json({ error });
+  }
+});
+
 routes.post("/createUser", async (req, res) => {
   try {
     const { address, cpf, email, name, number }: UserProps =

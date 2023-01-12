@@ -2,7 +2,7 @@ import { Eye, X } from "phosphor-react";
 import { useState } from "react";
 import { Loading } from "../Loading";
 import * as Dialog from "@radix-ui/react-dialog";
-import { User } from "./User";
+import { UserData } from "./User";
 
 export function Users(props: { randomUsers: any[]; loading: boolean }) {
   const [isDialogClientDataOpen, setIsDialogClientDataOpen] = useState(false);
@@ -26,7 +26,7 @@ export function Users(props: { randomUsers: any[]; loading: boolean }) {
               size={30}
             />
 
-            <User user={currentUser} />
+            <UserData user={currentUser} />
 
             <Dialog.Description />
           </Dialog.Content>

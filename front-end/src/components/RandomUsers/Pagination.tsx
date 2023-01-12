@@ -5,6 +5,7 @@ export function Pagination(props: {
   postsPerPage: number;
   totalPosts: number;
   paginate: Function;
+  setIsSearchedUsersVoid: Function;
 }) {
   const pageNumbers = [];
 
@@ -18,9 +19,10 @@ export function Pagination(props: {
           <li
             className={`${
               props.currentPage == page ? "bg-blue-700 text-white" : "bg-white"
-            }  flex justify-center items-center  w-12 h-10 border-x-[1px] border-gray-400`}
+            } first:!border-r-[1px] last:!border-l-[1px]  cursor-pointer flex justify-center items-center  w-12 h-10 border-x-[1px] border-gray-400`}
             key={page}
             onClick={() => {
+              props.setIsSearchedUsersVoid(false);
               props.paginate(page);
             }}
           >

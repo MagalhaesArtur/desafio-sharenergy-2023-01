@@ -1,7 +1,14 @@
-import { Calendar, Envelope, MapPin, Person, Phone } from "phosphor-react";
+import {
+  Calendar,
+  Envelope,
+  MapPin,
+  Person,
+  Phone,
+  User,
+} from "phosphor-react";
 import { useState } from "react";
 
-export function User(props: { user: any }) {
+export function UserData(props: { user: any }) {
   const [currentInformation, setCurrentInformation] = useState(Object);
 
   return (
@@ -81,6 +88,18 @@ export function User(props: { user: any }) {
                 information: "My phone number is:",
 
                 data: props.user.cell,
+              });
+            }}
+            size={36}
+            className="text-[#575252] hover:text-green-500  transition-all"
+            weight="light"
+          />
+          <User
+            onMouseEnter={() => {
+              setCurrentInformation({
+                information: "My username is:",
+
+                data: props.user.login.username,
               });
             }}
             size={36}

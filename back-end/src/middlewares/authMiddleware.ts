@@ -29,8 +29,9 @@ export const authMiddleware = async (
     token = Authorization.split(" ")[1];
   }
   jwt.verify(token, process.env.JWT_PASS || "", async (err, decoded: any) => {
-    if (err)
-      return res.status(500).send({ auth: false, message: "Token inválido." });
+    if (err) {
+      return res.json({ auth: false, message: "Token inválido." }).status(501);
+    }
 
     const user = await prisma.admin.findUnique({
       where: {

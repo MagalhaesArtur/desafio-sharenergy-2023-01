@@ -14,6 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/clients" element={<Clients />} />
         <Route path="/randomUsers" element={<RandomUsers />} />
+        <Route path="/*" element={<Login />} />
       </Routes>
     </Router>
   );
