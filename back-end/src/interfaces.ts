@@ -10,5 +10,6 @@ export interface UserProps {
 export interface AdmProps {
   login: string;
   password: string;
+  rememberMe: boolean;
   id: string;
 }

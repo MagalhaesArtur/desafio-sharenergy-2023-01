@@ -4,11 +4,12 @@ import { Loading } from "../Loading";
 import * as Dialog from "@radix-ui/react-dialog";
 import { UserData } from "./User";
 
+import "./styles/user.css";
+
 export function Users(props: { randomUsers: any[]; loading: boolean }) {
   const [isDialogClientDataOpen, setIsDialogClientDataOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(Object);
 
-  console.log(props.randomUsers);
   return (
     <>
       <Dialog.Root
@@ -34,11 +35,20 @@ export function Users(props: { randomUsers: any[]; loading: boolean }) {
       </Dialog.Root>
 
       {props.loading ? (
-        <Loading />
+        <div className=" flex justify-center items-center w-[60%] h-[600px]">
+          <Loading size={60} />
+        </div>
       ) : (
-        <div className="flex  w-[60%] h-[600px] gap-1 items-stretch rounded-lg  flex-col">
+        <div
+          id="user"
+          className="flex  w-full h-[600px] gap-1 items-stretch rounded-lg  flex-col"
+        >
           {props.randomUsers.map((user) => (
-            <div className="flex bg-[#dcdde1] gap-6 justify-between  rounded-lg p-3 border-gray-700 h-[20%] items-center">
+            <div
+              key={user.login.username}
+              id="userBox"
+              className="flex  bg-[#dcdde1] gap-6 justify-between  rounded-lg p-3 border-gray-700 h-[20%] items-center"
+            >
               <div className="flex gap-6 items-center">
                 <img
                   className="rounded-full border-[#353b48] border-[2px]"

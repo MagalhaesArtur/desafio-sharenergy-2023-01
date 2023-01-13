@@ -5,11 +5,16 @@ export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
-export const LoginApi = async (login: string, password: string) => {
+export const LoginApi = async (
+  login: string,
+  password: string,
+  rememberMe: boolean
+) => {
   try {
     const response = await api.post("/login", {
       login,
       password,
+      rememberMe,
     });
     return response.data;
   } catch (err: any) {

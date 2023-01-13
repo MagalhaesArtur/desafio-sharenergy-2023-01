@@ -1,0 +1,17 @@
+@media (max-width: 767px) {
+  #userBox {
+    flex-direction: column;
+    height: 200px;
+    width: 300px;
+  }
+  #container {
+    margin-bottom: 250px;
+  }
+  #user {
+    align-items: center;
+  }
+  #navigateButtons {
+    top: 100px;
+    right: 50px;
+  }
+}

@@ -8,12 +8,19 @@ import ClientData from "./ClientData";
 import UpClient from "./UpClient";
 import { useNavigate } from "react-router-dom";
 import CreateClient from "./CreateClient";
+import { Button } from "@mui/material";
+
+import "./styles/client.css";
 
 function Clients() {
   let navigate = useNavigate();
 
   const [clients, setClients] = useState(Array<ClientsProps>);
   const [currentClient, setCurrentClient] = useState(Object);
+
+  const [redirectLoadingUsers, setRedirectLoadingUsers] = useState(false);
+  const [redirectLoadingHTTP, setRedirectLoadingHTTP] = useState(false);
+  const [redirectLoadingDog, setRedirectLoadingDog] = useState(false);
 
   const [isCreatedClient, setIsCreatedClient] = useState(false);
 
@@ -43,6 +50,41 @@ function Clients() {
     <div
       className={`flex justify-around flex-col  items-center bg-no-repeat bg-center h-[100vh] w-[100vw] `}
     >
+      <div className="absolute top-4 flex items-center gap-3 right-4">
+        <Button
+          onClick={() => {
+            setRedirectLoadingUsers(true);
+            setTimeout(() => {
+              setRedirectLoadingUsers(false);
+              navigate("/randomUsers");
+            }, 500);
+          }}
+        >
+          {redirectLoadingUsers ? <Loading size={32} /> : <h1>Random Users</h1>}
+        </Button>
+        <Button
+          onClick={() => {
+            setRedirectLoadingHTTP(true);
+            setTimeout(() => {
+              setRedirectLoadingHTTP(false);
+              navigate("/httpcats");
+            }, 500);
+          }}
+        >
+          {redirectLoadingHTTP ? <Loading size={32} /> : <h1>HTTP Cats</h1>}
+        </Button>
+        <Button
+          onClick={() => {
+            setRedirectLoadingDog(true);
+            setTimeout(() => {
+              setRedirectLoadingDog(false);
+              navigate("/randomDog");
+            }, 500);
+          }}
+        >
+          {redirectLoadingDog ? <Loading size={32} /> : <h1>Random Dogs</h1>}
+        </Button>
+      </div>
       <CreateClient
         setIsCreatedClient={setIsCreatedClient}
         isCreatedClient={isCreatedClient}
@@ -56,7 +98,10 @@ function Clients() {
       >
         <Dialog.Portal>
           <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
-          <Dialog.Content className="fixed   bg-[#d0d3d4] py-8 px-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  text-[#14163c] rounded-lg w-[600px] shadow-lg shadow-black/40">
+          <Dialog.Content
+            id="dialogClientData"
+            className="fixed   bg-[#d0d3d4] py-8 px-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  text-[#14163c] rounded-lg w-[600px] shadow-lg shadow-black/40"
+          >
             <X
               className="absolute cursor-pointer right-4 top-4"
               onClick={() => {
@@ -81,7 +126,10 @@ function Clients() {
       >
         <Dialog.Portal>
           <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
-          <Dialog.Content className="fixed   bg-[#d0d3d4] py-8 px-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  text-[#14163c] rounded-lg w-[600px] shadow-lg shadow-black/40">
+          <Dialog.Content
+            id="dialogClientData"
+            className="fixed   bg-[#d0d3d4] py-8 px-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  text-[#14163c] rounded-lg w-[600px] shadow-lg shadow-black/40"
+          >
             <X
               className="absolute cursor-pointer right-4 top-4"
               onClick={() => {

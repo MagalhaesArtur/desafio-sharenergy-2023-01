@@ -2,17 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 body {
-  background: #000428; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #004e92,
-    #000428
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #004e92,
-    #000428
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #fff; /* fallback for old browsers */
 }
 #form {
   height: 400px;
@@ -22,6 +12,12 @@ body {
   backdrop-filter: blur(8.5px);
   -webkit-backdrop-filter: blur(8.5px);
   border-radius: 10px;
+}
+
+@media (max-width: 770px) {
+  #form {
+    width: 80%;
+  }
 }
 
 .input {
@@ -69,7 +65,7 @@ body {
   transition-timing-function: ease-in-out;
 }
 #submitButton {
-  background: linear-gradient(to right, #14163c 0%, #03217b 79%);
+  background: linear-gradient(to right, #00a2a2 0%, #9cad1c 79%);
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   width: 65%;

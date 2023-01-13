@@ -6,6 +6,8 @@ import jwt from "jsonwebtoken";
 
 export class UserController {
   async Login(data: AdmProps) {
+    console.log(data);
+    var rememberMe = data.rememberMe;
     const userExistsLogin = await prisma.admin.findUnique({
       where: {
         login: data.login,
@@ -23,7 +25,7 @@ export class UserController {
         { id: userExistsLogin.id },
         process.env.JWT_PASS || "",
         {
-          expiresIn: 60 * 60,
+          expiresIn: rememberMe ? "1d" : 20,
         }
       );
       const { password, ...user } = userExistsLogin;

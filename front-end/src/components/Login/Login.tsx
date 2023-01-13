@@ -5,6 +5,10 @@ import { LoginApi } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "../Loading";
 
+import "./styles/login.css";
+import { Button, TextField } from "@mui/material";
+import { Globe } from "phosphor-react";
+
 function Login() {
   let navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -19,7 +23,7 @@ function Login() {
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     // Faz o login aqui
-    const res = await LoginApi(username, password);
+    const res = await LoginApi(username, password, rememberMe);
     if (typeof res == "string") {
       setLoading(false);
       setIsLoginError(true);
@@ -30,7 +34,7 @@ function Login() {
     } else {
       localStorage.setItem("token", res.token);
       setLoading(false);
-      navigate("/clients");
+      navigate("/randomUsers");
     }
   }
 
@@ -38,37 +42,99 @@ function Login() {
 
   return (
     <div className="flex justify-center items-center bg-no-repeat bg-center h-[100vh] w-[100vw]">
-      <div id="form" className="flex flex-col justify-around items-center">
-        <h1 className="text-slate-300 font-bold text-3xl">WELCOME</h1>
+      <div className="w-[60%] bg-center h-[100vh]  flex flex-col justify-center items-center  bg-solarPainel">
+        <h1 id="title" className="text-5xl text-white font-bold ">
+          Bem vindo.
+        </h1>
+        <div
+          id="textContainer"
+          className="p-4 flex-col items-center  flex justify-start text-2xl mt-[200px] font-normal  bg-white text-[#2a2a2a]"
+        >
+          <h1 id="title2" className="text-8xl mb-3 text-[#2a2a2a]">
+            {" "}
+          </h1>
+          <h2 className="mb-4">
+            Economize com a Energia Solar! Tenha ao seu lado uma equipe de
+            especialistas em energia solar. Economia, segurança e retorno do seu
+            investimento garantidos.
+          </h2>
+          <div>
+            Saiba mais em:{" "}
+            <a href="https://www.sharenergy.com.br/" target="_blank">
+              {" "}
+              <Button
+                className="mt-4 !bg-[#00A2A2] flex items-center gap-2"
+                variant="contained"
+              >
+                <Globe size={32} color="white" />
+                Sharenergy
+              </Button>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div className=" !w-[40%] flex flex-col justify-around items-center">
+        <img
+          src="https://www.sharenergy.com.br/wp-content/uploads/2022/12/logo_color.png"
+          className="w-[60%] mb-10"
+          alt=""
+        />
         <form
-          className="flex items-center text-slate-200 flex-col"
+          className="flex items-center w-full text-slate-200 flex-col"
           onSubmit={handleSubmit}
         >
-          <label>
-            <input
-              required
-              className={`input ${
-                isLoginError ? "!border-red-500 !border-[1px]" : null
-              }`}
-              placeholder="Username"
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </label>
+          <TextField
+            className="username !text-red-400"
+            label="Login"
+            type={"text"}
+            variant="outlined"
+            inputProps={{ maxLength: 30 }}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            sx={{
+              width: "70%",
+              "& label.Mui-focused": {
+                color: `${isLoginError ? "#DC2626 " : "#00A2A2"}`,
+              },
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: `${isLoginError ? "#DC2626 " : "#00A2A2"}`,
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: `${isLoginError ? "#DC2626 " : "#00A2A2"}`,
+                },
+              },
+            }}
+            required
+          />
+
           <br />
-          <label>
-            <input
-              required
-              className={`input ${
-                isLoginError ? "!border-red-600 !border-[1px]" : null
-              }`}
-              placeholder="Password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
+
+          <TextField
+            className="username !text-red-400"
+            label="Password"
+            type="password"
+            variant="outlined"
+            inputProps={{ maxLength: 30 }}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            sx={{
+              width: "70%",
+              "& label.Mui-focused": {
+                color: `${isLoginError ? "#DC2626 " : "#00A2A2"}`,
+              },
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: `${isLoginError ? "#DC2626 " : "#00A2A2"}`,
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: `${isLoginError ? "#DC2626 " : "#00A2A2"}`,
+                },
+              },
+            }}
+            required
+          />
+
           <br />
           {isLoginError ? (
             <h1 className="text-lg text-red-700 font-bold">{MessageError}</h1>
@@ -88,8 +154,11 @@ function Login() {
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
             />
-            <label htmlFor="check" className="font-semibold text-lg">
-              Remember me
+            <label
+              htmlFor="check"
+              className="text-slate-800 font-semibold text-lg"
+            >
+              Lembre de Mim
             </label>
           </div>
           <br />
@@ -100,7 +169,7 @@ function Login() {
             id="submitButton"
             type="submit"
           >
-            {loading ? <Loading size={30} /> : "Sing Up"}
+            {loading ? <Loading size={30} /> : "Login"}
           </button>
         </form>
       </div>

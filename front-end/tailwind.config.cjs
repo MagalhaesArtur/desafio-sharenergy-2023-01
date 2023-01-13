@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         image: "url('./assets/background.jpg')",
+        solarPainel: "url('./src/assets/solarPainel.jpg')",
       },
     },
   },

@@ -1,14 +1,14 @@
 import axios from "axios";
 
-export const api = axios.create({
-  baseURL: "https://randomuser.me/api",
-});
-
 export const apiCrud = axios.create({
   baseURL: "http://localhost:4444",
 });
 
-export const GetRandomUsers = async () => {
+export const api = axios.create({
+  baseURL: "https://random.dog/",
+});
+
+export const getAuth = async () => {
   try {
     const token = localStorage.getItem("token");
 
@@ -18,13 +18,17 @@ export const GetRandomUsers = async () => {
       },
     });
 
-    if (responseCrud.data.message != "ok") {
+    if (responseCrud.data.message !== "ok") {
       return { message: "token inválido" };
+    } else {
+      return { message: "ok" };
     }
-
-    const response = await api.get("/?page=1&results=30&seed=abc");
-    return response.data.results;
   } catch (err: any) {
     return err.response.data.message;
   }
+};
+
+export const getDog = async () => {
+  const response = await api.get("/woof.json");
+  return response.data.url;
 };

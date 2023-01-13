@@ -6,7 +6,7 @@ export function Loading(props?: any) {
       <CircleNotch
         size={props.size || 50}
         weight="bold"
-        className="text-roxin-100 animate-spin"
+        className="text-white animate-spin"
       />
     </div>
   );
