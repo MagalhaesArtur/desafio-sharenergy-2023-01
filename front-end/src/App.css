@@ -3,6 +3,7 @@
 @tailwind utilities;
 body {
   background: #fff; /* fallback for old browsers */
+  overflow-x: hidden;
 }
 #form {
   height: 400px;
@@ -53,7 +54,7 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #0e5cad;
+  background-color: #00a2a2;
   border-radius: 20px;
   border: 3px solid #d0d3d4;
 }

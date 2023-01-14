@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
-import { blue, pink } from "@mui/material/colors";
+import { blue } from "@mui/material/colors";
 import { LoginApi } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "../Loading";
@@ -38,21 +38,19 @@ function Login() {
     }
   }
 
-  console.log(rememberMe);
-
   return (
     <div className="flex justify-center items-center bg-no-repeat bg-center h-[100vh] w-[100vw]">
-      <div className="w-[60%] bg-center h-[100vh]  flex flex-col justify-center items-center  bg-solarPainel">
+      <div
+        id="image"
+        className="w-[60%] bg-center h-[100vh]  flex flex-col justify-center items-center  bg-solarPainel"
+      >
         <h1 id="title" className="text-5xl text-white font-bold ">
           Bem vindo.
         </h1>
         <div
           id="textContainer"
-          className="p-4 flex-col items-center  flex justify-start text-2xl mt-[200px] font-normal  bg-white text-[#2a2a2a]"
+          className="px-4 flex-col items-center  flex justify-between py-9 text-2xl mt-[200px] font-normal  bg-white text-[#2a2a2a]"
         >
-          <h1 id="title2" className="text-8xl mb-3 text-[#2a2a2a]">
-            {" "}
-          </h1>
           <h2 className="mb-4">
             Economize com a Energia Solar! Tenha ao seu lado uma equipe de
             especialistas em energia solar. Economia, segurança e retorno do seu
@@ -63,7 +61,7 @@ function Login() {
             <a href="https://www.sharenergy.com.br/" target="_blank">
               {" "}
               <Button
-                className="mt-4 !bg-[#00A2A2] flex items-center gap-2"
+                className="mt-4 !bg-[#00A2A2] hover:!bg-[#077373] transition-all flex items-center gap-2"
                 variant="contained"
               >
                 <Globe size={32} color="white" />
@@ -73,7 +71,10 @@ function Login() {
           </div>
         </div>
       </div>
-      <div className=" !w-[40%] flex flex-col justify-around items-center">
+      <div
+        id="formContainer"
+        className=" !w-[40%] flex flex-col justify-around items-center"
+      >
         <img
           src="https://www.sharenergy.com.br/wp-content/uploads/2022/12/logo_color.png"
           className="w-[60%] mb-10"

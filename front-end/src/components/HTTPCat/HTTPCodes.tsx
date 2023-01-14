@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 
 import "./styles/cat.css";
+import { NavBar } from "../NavBar";
 
 export function HTTPCodes() {
   let navigate = useNavigate();
@@ -13,11 +14,6 @@ export function HTTPCodes() {
   const [baseURL, setBaseURL] = useState("https://http.cat");
   const [currentCode, setCurrentCode] = useState("200");
   const [loading, setLoading] = useState(false);
-
-  const [redirectLoadingUsers, setRedirectLoadingUsers] = useState(false);
-  const [redirectLoadingDog, setRedirectLoadingDog] = useState(false);
-
-  const [redirectLoadingHTTP, setRedirectLoadingHTTP] = useState(false);
 
   useEffect(() => {
     const getUrl = async () => {
@@ -36,48 +32,13 @@ export function HTTPCodes() {
   });
 
   return (
-    <div className="items-center  justify-center flex h-[100vh] w-[100vw]">
-      <div className="absolute top-4 flex items-center gap-3 right-4">
-        <Button
-          onClick={() => {
-            setRedirectLoadingUsers(true);
-            setTimeout(() => {
-              setRedirectLoadingUsers(false);
-              navigate("/randomUsers");
-            }, 500);
-          }}
-        >
-          {redirectLoadingUsers ? <Loading size={32} /> : <h1>Random Users</h1>}
-        </Button>
-        <Button
-          onClick={() => {
-            setRedirectLoadingHTTP(true);
-            setTimeout(() => {
-              setRedirectLoadingHTTP(false);
-              navigate("/clients");
-            }, 500);
-          }}
-        >
-          {redirectLoadingHTTP ? <Loading size={32} /> : <h1>Clients</h1>}
-        </Button>
-
-        <Button
-          onClick={() => {
-            setRedirectLoadingDog(true);
-            setTimeout(() => {
-              setRedirectLoadingDog(false);
-              navigate("/randomDog");
-            }, 500);
-          }}
-        >
-          {redirectLoadingDog ? <Loading size={32} /> : <h1>Random Dogs</h1>}
-        </Button>
-      </div>
+    <div className="items-center  flex-col justify-start flex h-[100vh] w-[100vw]">
+      <NavBar />
       <form className="h-[700px] gap-6 flex flex-col">
         <div id="formSection" className="flex gap-4 items-center">
           <h1
             defaultValue={"200"}
-            className="text-white text-2xl font-semibold"
+            className="text-slate-800 text-2xl font-semibold"
           >
             Selecione um Código HTTP:
           </h1>

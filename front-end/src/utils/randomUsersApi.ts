@@ -22,7 +22,7 @@ export const GetRandomUsers = async () => {
       return { message: "token inválido" };
     }
 
-    const response = await api.get("/?page=1&results=30&seed=abc");
+    const response = await api.get("/?page=1&results=500&seed=abc");
     return response.data.results;
   } catch (err: any) {
     return err.response.data.message;

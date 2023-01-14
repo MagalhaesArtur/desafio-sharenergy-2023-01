@@ -41,7 +41,7 @@ export function Users(props: { randomUsers: any[]; loading: boolean }) {
       ) : (
         <div
           id="user"
-          className="flex  w-full h-[600px] gap-1 items-stretch rounded-lg  flex-col"
+          className="flex  w-full h-[600px] gap-3 items-stretch rounded-lg  flex-col"
         >
           {props.randomUsers.map((user) => (
             <div
@@ -65,7 +65,7 @@ export function Users(props: { randomUsers: any[]; loading: boolean }) {
                   setCurrentUser(user);
                 }}
                 title="Visualizar todos os dados"
-                className="bg-green-700 mr-4 hover:bg-green-600 transition-all w-10 h-10 flex justify-center items-center rounded-md"
+                className="bg-[#00a2a2] mr-4 hover:bg-[#2e6464] transition-all w-10 h-10 flex justify-center items-center rounded-md"
               >
                 <Eye color="white" size={26} />
               </button>

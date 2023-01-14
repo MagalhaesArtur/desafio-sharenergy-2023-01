@@ -11,16 +11,13 @@ import CreateClient from "./CreateClient";
 import { Button } from "@mui/material";
 
 import "./styles/client.css";
+import { NavBar } from "../NavBar";
 
 function Clients() {
   let navigate = useNavigate();
 
   const [clients, setClients] = useState(Array<ClientsProps>);
   const [currentClient, setCurrentClient] = useState(Object);
-
-  const [redirectLoadingUsers, setRedirectLoadingUsers] = useState(false);
-  const [redirectLoadingHTTP, setRedirectLoadingHTTP] = useState(false);
-  const [redirectLoadingDog, setRedirectLoadingDog] = useState(false);
 
   const [isCreatedClient, setIsCreatedClient] = useState(false);
 
@@ -48,43 +45,10 @@ function Clients() {
 
   return (
     <div
-      className={`flex justify-around flex-col  items-center bg-no-repeat bg-center h-[100vh] w-[100vw] `}
+      className={`flex justify-start flex-col  items-center bg-no-repeat bg-center h-[100vh] w-[100vw] `}
     >
-      <div className="absolute top-4 flex items-center gap-3 right-4">
-        <Button
-          onClick={() => {
-            setRedirectLoadingUsers(true);
-            setTimeout(() => {
-              setRedirectLoadingUsers(false);
-              navigate("/randomUsers");
-            }, 500);
-          }}
-        >
-          {redirectLoadingUsers ? <Loading size={32} /> : <h1>Random Users</h1>}
-        </Button>
-        <Button
-          onClick={() => {
-            setRedirectLoadingHTTP(true);
-            setTimeout(() => {
-              setRedirectLoadingHTTP(false);
-              navigate("/httpcats");
-            }, 500);
-          }}
-        >
-          {redirectLoadingHTTP ? <Loading size={32} /> : <h1>HTTP Cats</h1>}
-        </Button>
-        <Button
-          onClick={() => {
-            setRedirectLoadingDog(true);
-            setTimeout(() => {
-              setRedirectLoadingDog(false);
-              navigate("/randomDog");
-            }, 500);
-          }}
-        >
-          {redirectLoadingDog ? <Loading size={32} /> : <h1>Random Dogs</h1>}
-        </Button>
-      </div>
+      <NavBar />
+
       <CreateClient
         setIsCreatedClient={setIsCreatedClient}
         isCreatedClient={isCreatedClient}
