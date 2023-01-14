@@ -8,6 +8,6 @@ app.use(cors());
 app.use(express.json());
 app.use(routes);
 
-app.listen(7583, () =>
+app.listen(process.env.PORT || 4444, () =>
   console.log("server rodando na porta 4444" + process.env.PORT)
 );
