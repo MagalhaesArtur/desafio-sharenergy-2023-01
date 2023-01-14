@@ -6,7 +6,6 @@ import jwt from "jsonwebtoken";
 
 export class UserController {
   async Login(data: AdmProps) {
-    console.log(data);
     var rememberMe = data.rememberMe;
     const userExistsLogin = await prisma.admin.findUnique({
       where: {
