@@ -35,7 +35,10 @@ export function Users(props: { randomUsers: any[]; loading: boolean }) {
       </Dialog.Root>
 
       {props.loading ? (
-        <div className=" flex justify-center items-center w-[60%] h-[600px]">
+        <div
+          id="userContainer"
+          className=" flex justify-center items-center w-[60%] h-[600px]"
+        >
           <Loading size={60} />
         </div>
       ) : (

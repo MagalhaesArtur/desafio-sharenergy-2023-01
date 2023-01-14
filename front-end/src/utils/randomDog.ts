@@ -11,6 +11,10 @@ export const api = axios.create({
 export const getAuth = async () => {
   try {
     const token = localStorage.getItem("token");
+    console.log(token);
+    if (token == "") {
+      return { message: "token inválido" };
+    }
 
     const responseCrud = await apiCrud.get("/auth", {
       headers: {

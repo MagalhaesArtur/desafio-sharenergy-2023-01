@@ -4,25 +4,22 @@ import { blue } from "@mui/material/colors";
 import { LoginApi } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "../Loading";
-
-import "./styles/login.css";
 import { Button, TextField } from "@mui/material";
 import { Globe } from "phosphor-react";
+import "./styles/login.css";
+import { SwitchTheme } from "../SwitchTheme";
 
-function Login() {
+function Login(props: { isDarkMode: boolean }) {
   let navigate = useNavigate();
   const [username, setUsername] = useState("");
-
   const [isLoginError, setIsLoginError] = useState(false);
   const [MessageError, setMessageError] = useState("");
-
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    // Faz o login aqui
     const res = await LoginApi(username, password, rememberMe);
     if (typeof res == "string") {
       setLoading(false);
@@ -37,6 +34,7 @@ function Login() {
       navigate("/randomUsers");
     }
   }
+  console.log(props.isDarkMode);
 
   return (
     <div className="flex justify-center items-center bg-no-repeat bg-center h-[100vh] w-[100vw]">
@@ -48,8 +46,10 @@ function Login() {
           Bem vindo.
         </h1>
         <div
-          id="textContainer"
-          className="px-4 flex-col items-center  flex justify-between py-9 text-2xl mt-[200px] font-normal  bg-white text-[#2a2a2a]"
+          id={`${props.isDarkMode ? "textContainer2" : "textContainer"}`}
+          className={`px-4 flex-col items-center  flex justify-between transition-all py-9 text-2xl mt-[200px] font-normal ${
+            props.isDarkMode ? " text-white" : "text-[#2a2a2a]"
+          }  `}
         >
           <h2 className="mb-4">
             Economize com a Energia Solar! Tenha ao seu lado uma equipe de
@@ -81,12 +81,13 @@ function Login() {
           alt=""
         />
         <form
+          id={`${props.isDarkMode ? "textBox" : null}`}
           className="flex items-center w-full text-slate-200 flex-col"
           onSubmit={handleSubmit}
         >
           <TextField
-            className="username !text-red-400"
             label="Login"
+            className="!text-red-700"
             type={"text"}
             variant="outlined"
             inputProps={{ maxLength: 30 }}
@@ -100,6 +101,9 @@ function Login() {
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
                   borderColor: `${isLoginError ? "#DC2626 " : "#00A2A2"}`,
+                },
+                "&:hover fieldset": {
+                  borderColor: `#077373`,
                 },
                 "&.Mui-focused fieldset": {
                   borderColor: `${isLoginError ? "#DC2626 " : "#00A2A2"}`,
@@ -127,6 +131,9 @@ function Login() {
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
                   borderColor: `${isLoginError ? "#DC2626 " : "#00A2A2"}`,
+                },
+                "&:hover fieldset": {
+                  borderColor: `#077373`,
                 },
                 "&.Mui-focused fieldset": {
                   borderColor: `${isLoginError ? "#DC2626 " : "#00A2A2"}`,

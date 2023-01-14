@@ -15,7 +15,10 @@ type Anchor = "right";
 
 export default function Sandwich() {
   let navigate = useNavigate();
-
+  const logOut = () => {
+    navigate("/login");
+    localStorage.setItem("token", "");
+  };
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -46,7 +49,7 @@ export default function Sandwich() {
     >
       <Divider />
       <ListMui>
-        {["Random Users", "Clientes", "HTTP Cat", "Random Dog"].map(
+        {["Random Users", "Clientes", "HTTP Cat", "Random Dog", "Log Out"].map(
           (text, index) => (
             <ListItem
               onClick={() => {
@@ -59,6 +62,8 @@ export default function Sandwich() {
                     ? navigate("/httpcats")
                     : index == 3
                     ? navigate("/randomDog")
+                    : index == 4
+                    ? logOut()
                     : null;
                 }
               }}

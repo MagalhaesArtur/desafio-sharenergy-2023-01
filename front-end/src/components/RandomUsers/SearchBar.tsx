@@ -11,10 +11,12 @@ interface SearchBarProps {
   paginate: Function;
   setPostsPerPage: Function;
   setIsSearchedUsersVoid: Function;
+  isDarkMode: boolean;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
   onSearch,
+  isDarkMode,
   setCurrentSearchBy,
   currentPage,
   setPostsPerPage,
@@ -38,8 +40,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
       id="searchBar"
       onSubmit={handleSubmit}
     >
-      <div className="w-full gap-6 flex justify-center items-center ">
-        <h2 className="text-slate-800">Filtrar por...</h2>
+      <div
+        id="searchBox"
+        className="w-full gap-6 flex justify-center items-center "
+      >
+        <h2 className={`${isDarkMode ? "text-white" : "text-slate-800"} `}>
+          Filtrar por...
+        </h2>
         <select
           onChange={(e) => {
             setCurrentSearchBy(e.target.value);
@@ -58,7 +65,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
           <option value="username">Username</option>
         </select>
 
-        <div id="searchBox" className="flex gap-6 justify-center items-center">
+        <div
+          id={`${isDarkMode ? "searchContainer" : null}`}
+          className="flex gap-6 transition-all justify-center items-center"
+        >
           <TextField
             label="Search"
             type={"text"}
@@ -107,7 +117,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         </Button>
       </div>
 
-      <div className="w-full gap-6 flex justify-center items-center ">
+      <div className="w-full transition-all gap-6 flex justify-center items-center ">
         <TablePagination
           page={currentPage - 1}
           onPageChange={(
@@ -125,6 +135,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           count={500}
           labelRowsPerPage="Quantidade: "
           sx={{
+            color: `${isDarkMode ? "white" : null}`,
             width: "80%",
             display: "flex",
             alignItems: "center",

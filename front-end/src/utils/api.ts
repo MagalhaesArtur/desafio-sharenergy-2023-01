@@ -30,6 +30,7 @@ export const GetUsers = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
+
     return response;
   } catch (err: any) {
     return err.response.data.message;

@@ -10,6 +10,8 @@ const UpClient = (props: {
   client: ClientsProps;
   clients: ClientsProps[];
   setClients: Function;
+  isDarkMode: boolean;
+
   setIsDialogUpdateDataOpen: Function;
 }) => {
   const [cpf, setCpf] = useState(props.client.cpf);
@@ -89,18 +91,23 @@ const UpClient = (props: {
 
   return (
     <form
-      className="flex mt-[50px] items-center flex-col gap-1"
+      className={` flex mt-[50px] ${
+        props.isDarkMode ? "text-white" : "text-slate-800 "
+      } items-center flex-col gap-1`}
       onSubmit={handleSubmit}
     >
-      <label className={`  w-[90%] flex flex-col justify-around`}>
+      <label
+        className={`
+w-[90%] flex flex-col justify-around`}
+      >
         <div className="flex w-full items-center justify-around">
-          <h2 className="text-slate-800 font-semibold text-base">CPF:</h2>
+          <h2 className=" font-semibold text-base">CPF:</h2>
           <InputMask
             mask="999.999.999-99"
             required
             className={` ${
               CPFErr ? "!border-red-500 !border-[1px]" : null
-            } input1 !shadow-md focus:border-green-500 w-[70%]`}
+            } input1 !shadow-md focus:border-[#00a2a2] w-[70%]`}
             type="text"
             value={cpf}
             onChange={(e) => {
@@ -118,12 +125,12 @@ const UpClient = (props: {
       <br />
       <label className="w-[90%] items-center flex  flex-col   justify-around">
         <div className="flex w-full items-center justify-around">
-          <h2 className="text-slate-800 font-semibold text-base">Email:</h2>
+          <h2 className=" font-semibold text-base">Email:</h2>
           <input
             required
             className={`input1 ${
               emailErr ? "!border-red-500 !border-[1px]" : null
-            } !shadow-md focus:border-green-500 w-[70%]`}
+            } !shadow-md focus:border-[#00a2a2] w-[70%]`}
             type="email"
             value={email}
             onChange={(e) => {
@@ -140,10 +147,10 @@ const UpClient = (props: {
       </label>
       <br />
       <label className="w-[90%] items-center flex  justify-around">
-        <h2 className="text-slate-800 font-semibold text-base">Nome:</h2>
+        <h2 className=" font-semibold text-base">Nome:</h2>
         <input
           required
-          className="input1 !shadow-md focus:!border-green-500 w-[70%]"
+          className="input1 !shadow-md focus:!border-[#00a2a2] w-[70%]"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -152,13 +159,13 @@ const UpClient = (props: {
       <br />
       <label className="w-[90%] items-center flex flex-col  justify-around">
         <div className="flex w-full items-center justify-around">
-          <h2 className="text-slate-800 font-semibold text-base">Telefone:</h2>
+          <h2 className=" font-semibold text-base">Telefone:</h2>
           <InputMask
             mask="(99)99999-9999"
             required
             className={`input1 !shadow-md ${
               numErr ? "!border-red-500 !border-[1px]" : null
-            } focus:border-green-500 w-[70%]`}
+            } focus:border-[#00a2a2] w-[70%]`}
             type="tel"
             value={number}
             onChange={(e) => {
@@ -175,10 +182,10 @@ const UpClient = (props: {
       </label>
       <br />
       <label className="w-[90%] items-center flex  justify-around">
-        <h2 className="text-slate-800 font-semibold text-base">Endereço:</h2>
+        <h2 className=" font-semibold text-base">Endereço:</h2>
         <input
           required
-          className="input1 !shadow-md focus:!border-green-500 w-[70%]"
+          className="input1 !shadow-md focus:!border-[#00a2a2] w-[70%]"
           type="text"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
@@ -191,7 +198,7 @@ const UpClient = (props: {
           setLoading(true);
         }}
         id="submitButton"
-        className="hover:!border-green-600"
+        className="hover:!border-[#00a2a2]"
         type="submit"
       >
         {loading ? <Loading size={30} /> : "Atualizar Dados"}

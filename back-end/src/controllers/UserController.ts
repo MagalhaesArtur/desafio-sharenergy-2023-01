@@ -25,7 +25,7 @@ export class UserController {
         { id: userExistsLogin.id },
         process.env.JWT_PASS || "",
         {
-          expiresIn: rememberMe ? "1d" : 20,
+          expiresIn: rememberMe ? "1d" : 60 * 60,
         }
       );
       const { password, ...user } = userExistsLogin;

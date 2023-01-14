@@ -6,6 +6,8 @@ import { validateEmail, validateCPF, validadeNumber } from "../../utils/regex";
 import { Loading } from "../Loading";
 
 function CreateClientForm(props: {
+  isDarkMode: boolean;
+
   isDialogCreateClientOpen: boolean;
   setIsDialogCreateClientOpen: Function;
   setIsCreatedClient: Function;
@@ -82,12 +84,15 @@ function CreateClientForm(props: {
 
   return (
     <form
-      className="flex mt-[50px] items-center flex-col gap-1"
+      className={` flex mt-[50px] ${
+        props.isDarkMode ? "text-white" : " text-slate-800"
+      }
+      items-center flex-col gap-1`}
       onSubmit={handleSubmit}
     >
       <label className={`  w-[90%] flex flex-col justify-around`}>
         <div className="flex w-full items-center justify-around">
-          <h2 className="text-slate-800 font-semibold text-base">CPF:</h2>
+          <h2 className=" font-semibold text-base">CPF:</h2>
           <InputMask
             mask="999.999.999-99"
             required
@@ -122,7 +127,7 @@ function CreateClientForm(props: {
       <br />
       <label className="w-[90%] items-center flex  flex-col   justify-around">
         <div className="flex w-full items-center justify-around">
-          <h2 className="text-slate-800 font-semibold text-base">Email:</h2>
+          <h2 className=" font-semibold text-base">Email:</h2>
           <input
             required
             className={`input1 ${
@@ -150,7 +155,7 @@ function CreateClientForm(props: {
       </label>
       <br />
       <label className="w-[90%] items-center flex  justify-around">
-        <h2 className="text-slate-800 font-semibold text-base">Nome:</h2>
+        <h2 className=" font-semibold text-base">Nome:</h2>
         <input
           required
           className="input1 !shadow-md focus:!border-green-500 w-[70%]"
@@ -162,7 +167,7 @@ function CreateClientForm(props: {
       <br />
       <label className="w-[90%] items-center flex flex-col  justify-around">
         <div className="flex w-full items-center justify-around">
-          <h2 className="text-slate-800 font-semibold text-base">Telefone:</h2>
+          <h2 className=" font-semibold text-base">Telefone:</h2>
           <InputMask
             mask="(99)99999-9999"
             required
@@ -191,7 +196,7 @@ function CreateClientForm(props: {
       </label>
       <br />
       <label className="w-[90%] items-center flex  justify-around">
-        <h2 className="text-slate-800 font-semibold text-base">Endereço:</h2>
+        <h2 className=" font-semibold text-base">Endereço:</h2>
         <input
           required
           className="input1 !shadow-md focus:!border-green-500 w-[70%]"

@@ -20,20 +20,15 @@ interface RandomUserProps {
   };
 }
 
-export function RandomUsers() {
+export function RandomUsers(props: { isDarkMode: boolean }) {
   let navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-
   const [isSearchedUsersVoid, setIsSearchedUsersVoid] = useState(false);
-
   const [randomUsers, setRandomUsers] = useState(Array<RandomUserProps>);
   let [currentUsers, setCurrentUsers] = useState(Array<RandomUserProps>);
-
   const [currentPage, setCurrentPage] = useState(1);
-
   const [currentSearchBy, setCurrentSearchBy] = useState("name");
-
   const [postsPerPage, setPostsPerPage] = useState(10);
 
   useEffect(() => {
@@ -43,7 +38,6 @@ export function RandomUsers() {
       const users = await GetRandomUsers();
       if (users.message == "token inválido") {
         navigate("/login");
-        alert("Token Inválido!");
       } else {
         setRandomUsers(users);
         let indexOfLastUser = currentPage * postsPerPage;
@@ -148,6 +142,7 @@ export function RandomUsers() {
         className="flex flex-col gap-5 justify-center items-center"
       >
         <SearchBar
+          isDarkMode={props.isDarkMode}
           currentPage={currentPage}
           postsPerPage={postsPerPage}
           setPostsPerPage={setPostsPerPage}

@@ -17,6 +17,17 @@
   border-radius: 10px;
 }
 
+#textContainer2 {
+  height: 300px;
+
+  width: 70%;
+  background: rgba(38, 32, 32, 0.824);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(3.5px);
+  -webkit-backdrop-filter: blur(3.5px);
+  border-radius: 10px;
+}
+
 @media (max-width: 767px) {
   #image {
     display: none;
@@ -26,4 +37,13 @@
   #formContainer {
     width: 100% !important;
   }
+}
+
+#textBox label {
+  color: #fff;
+}
+
+#textBox input {
+  color: #fff !important
+  ;
 }

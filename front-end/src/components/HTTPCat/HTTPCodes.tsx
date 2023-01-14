@@ -8,7 +8,7 @@ import { Button } from "@mui/material";
 import "./styles/cat.css";
 import { NavBar } from "../NavBar";
 
-export function HTTPCodes() {
+export function HTTPCodes(props: { isDarkMode: boolean }) {
   let navigate = useNavigate();
 
   const [baseURL, setBaseURL] = useState("https://http.cat");
@@ -38,7 +38,9 @@ export function HTTPCodes() {
         <div id="formSection" className="flex gap-4 items-center">
           <h1
             defaultValue={"200"}
-            className="text-slate-800 text-2xl font-semibold"
+            className={`transition-all ${
+              props.isDarkMode ? "text-white" : "text-slate-800"
+            }  text-2xl font-semibold`}
           >
             Selecione um Código HTTP:
           </h1>

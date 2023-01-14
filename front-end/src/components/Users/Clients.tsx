@@ -8,22 +8,17 @@ import ClientData from "./ClientData";
 import UpClient from "./UpClient";
 import { useNavigate } from "react-router-dom";
 import CreateClient from "./CreateClient";
-import { Button } from "@mui/material";
 
 import "./styles/client.css";
 import { NavBar } from "../NavBar";
 
-function Clients() {
+function Clients(props: { isDarkMode: boolean }) {
   let navigate = useNavigate();
-
   const [clients, setClients] = useState(Array<ClientsProps>);
   const [currentClient, setCurrentClient] = useState(Object);
-
   const [isCreatedClient, setIsCreatedClient] = useState(false);
-
   const [isDialogCreateClientOpen, setIsDialogCreateClientOpen] =
     useState(false);
-
   const [loading, setLoading] = useState(false);
   const [isDialogClientDataOpen, setIsDialogClientDataOpen] = useState(false);
   const [isDialogUdateDataOpen, setIsDialogUpdateDataOpen] = useState(false);
@@ -31,9 +26,9 @@ function Clients() {
   const getUsers = async () => {
     setLoading(true);
     const users = await GetUsers();
-    if (typeof users == "string") {
+
+    if (typeof users == "string" || users.data.auth == false) {
       navigate("/login");
-      alert(users + " Faça o login novamente!");
     } else {
       setClients(users.data);
       setLoading(false);
@@ -50,6 +45,7 @@ function Clients() {
       <NavBar />
 
       <CreateClient
+        isDarkMode={props.isDarkMode}
         setIsCreatedClient={setIsCreatedClient}
         isCreatedClient={isCreatedClient}
         isDialogCreateClientOpen={isDialogCreateClientOpen}
@@ -64,20 +60,26 @@ function Clients() {
           <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
           <Dialog.Content
             id="dialogClientData"
-            className="fixed   bg-[#d0d3d4] py-8 px-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  text-[#14163c] rounded-lg w-[600px] shadow-lg shadow-black/40"
+            className={`fixed ${
+              props.isDarkMode ? "bg-[#14163c]" : "bg-[#d0d3d4]"
+            }  py-8 px-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2   rounded-lg w-[600px] shadow-lg shadow-black/40`}
           >
             <X
-              className="absolute cursor-pointer right-4 top-4"
+              className="absolute text-red-500 cursor-pointer right-4 top-4"
               onClick={() => {
                 setIsDialogClientDataOpen(false);
               }}
               size={30}
             />
-            <Dialog.Title className="text-3xl  font-black">
+            <Dialog.Title
+              className={`text-3xl  ${
+                props.isDarkMode ? "text-white" : "text-slate-800"
+              } font-black`}
+            >
               Dados do cliente
             </Dialog.Title>
 
-            <ClientData client={currentClient} />
+            <ClientData isDarkMode={props.isDarkMode} client={currentClient} />
 
             <Dialog.Description />
           </Dialog.Content>
@@ -92,20 +94,27 @@ function Clients() {
           <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
           <Dialog.Content
             id="dialogClientData"
-            className="fixed   bg-[#d0d3d4] py-8 px-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  text-[#14163c] rounded-lg w-[600px] shadow-lg shadow-black/40"
+            className={`fixed ${
+              props.isDarkMode ? "bg-[#14163c]" : "bg-[#d0d3d4]"
+            }  py-8 px-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2   rounded-lg w-[600px] shadow-lg shadow-black/40`}
           >
             <X
-              className="absolute cursor-pointer right-4 top-4"
+              className="absolute text-red-500 cursor-pointer right-4 top-4"
               onClick={() => {
                 setIsDialogUpdateDataOpen(false);
               }}
               size={30}
             />
-            <Dialog.Title className="text-3xl  font-black">
+            <Dialog.Title
+              className={`text-3xl  ${
+                props.isDarkMode ? "text-white" : "text-slate-800"
+              } font-black`}
+            >
               Atualizar Dados do Cliente
             </Dialog.Title>
             <UpClient
               clients={clients}
+              isDarkMode={props.isDarkMode}
               setIsDialogUpdateDataOpen={setIsDialogUpdateDataOpen}
               setClients={setClients}
               client={currentClient}

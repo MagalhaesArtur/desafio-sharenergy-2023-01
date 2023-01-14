@@ -2,10 +2,11 @@
   #userBox {
     flex-direction: column;
     height: 200px;
-    width: 300px;
+    width: 400px;
   }
   #container {
     margin-bottom: 250px;
+    max-width: 80%;
   }
   #user {
     align-items: center;

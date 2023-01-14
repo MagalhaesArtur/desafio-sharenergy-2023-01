@@ -7,20 +7,40 @@ import Clients from "./components/Users/Clients";
 import { RandomUsers } from "./components/RandomUsers/RandomUsers";
 import { HTTPCodes } from "./components/HTTPCat/HTTPCodes";
 import { RandomDog } from "./components/RandomDog/RandomDog";
+import { SwitchTheme } from "./components/SwitchTheme";
 
 function App() {
+  let darkMode = false;
+  const theme = localStorage.getItem("theme");
+  if (theme && theme == "dark") {
+    darkMode = true;
+  }
+  const [isDarkMode, setIsDarkMode] = useState(darkMode);
   return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/clients" element={<Clients />} />
-        <Route path="/randomUsers" element={<RandomUsers />} />
-        <Route path="/httpcats" element={<HTTPCodes />} />
-        <Route path="/randomDog" element={<RandomDog />} />
+    <div id={`${isDarkMode ? "dark" : "vanilla"}`} className={`min-h-full `}>
+      <SwitchTheme setIsDarkMode={setIsDarkMode} isDarkMode={isDarkMode} />
 
-        <Route path="/*" element={<Login />} />
-      </Routes>
-    </Router>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login isDarkMode={isDarkMode} />} />
+          <Route
+            path="/clients"
+            element={<Clients isDarkMode={isDarkMode} />}
+          />
+          <Route
+            path="/randomUsers"
+            element={<RandomUsers isDarkMode={isDarkMode} />}
+          />
+          <Route
+            path="/httpcats"
+            element={<HTTPCodes isDarkMode={isDarkMode} />}
+          />
+          <Route path="/randomDog" element={<RandomDog />} />
+
+          <Route path="/*" element={<Clients isDarkMode={isDarkMode} />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
