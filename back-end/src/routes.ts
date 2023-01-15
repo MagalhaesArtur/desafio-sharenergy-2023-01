@@ -11,7 +11,7 @@ export const routes = express.Router();
 
 routes.post("/login", async (req, res) => {
   try {
-    const user = req.body;
+    const user = await req.body;
     const data = await new UserController().Login(user);
     return res.json(data);
   } catch (error) {
