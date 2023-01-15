@@ -13,6 +13,7 @@ routes.post("/login", async (req, res) => {
   try {
     const user = await req.body;
     const data = await new UserController().Login(user);
+    console.log(data, "9");
     return res.json(data);
   } catch (error) {
     return res.status(400).json({ error });

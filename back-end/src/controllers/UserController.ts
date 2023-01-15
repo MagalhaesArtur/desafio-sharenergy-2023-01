@@ -19,7 +19,6 @@ export class UserController {
       data.password,
       userExistsLogin.password
     );
-    console.log(verifyPass);
     if (verifyPass) {
       const token = jwt.sign(
         { id: userExistsLogin.id },
