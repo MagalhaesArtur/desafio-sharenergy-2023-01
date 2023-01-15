@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const apiCrud = axios.create({
-  baseURL: "http://localhost:4444",
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
 export const api = axios.create({

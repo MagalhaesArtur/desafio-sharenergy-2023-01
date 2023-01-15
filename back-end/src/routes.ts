@@ -6,6 +6,7 @@ import { CreateUser } from "./services/CreateUser";
 import { DeleteUser } from "./services/DeleteUser";
 import { GetUsers } from "./services/GetUsers";
 import { authMiddleware } from "./middlewares/authMiddleware";
+import { CreateAdmin } from "./services/CreateAdmin";
 
 export const routes = express.Router();
 
@@ -14,13 +15,25 @@ routes.post("/login", async (req, res) => {
     const user = await req.body;
     const userController = new UserController();
     const data = await userController.Login(user);
-    console.log(data, "9");
     return res.json(data);
   } catch (error) {
-    console.log(error, "asdas")
     return res.status(400).json({ error });
   }
 });
+
+routes.post("/register", async (req, res) => {
+  try {
+    const user = await req.body;
+    console.log(user);
+    const userController = new CreateAdmin();
+    const data = await userController.create(user);
+    return res.json(data);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json(error);
+  }
+});
+
 routes.use(authMiddleware);
 
 routes.get("/auth", async (req, res) => {
