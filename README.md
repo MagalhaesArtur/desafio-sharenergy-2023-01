@@ -17,7 +17,7 @@ Esse projeto conta com a utilização de várias API's e uma delas, criada por c
 
 
 Acesse a aplicação em funcionamento!
-Link: [https://desafio-sharenergy-8tiu.vercel.app/)
+Link: [https://sharenergy-desafio.vercel.app/)
 
 ## Fotos da aplicação:
 
