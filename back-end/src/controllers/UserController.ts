@@ -28,6 +28,8 @@ export class UserController {
         }
       );
       const { password, ...user } = userExistsLogin;
+      console.log({ user, token });
+
       return { user, token };
     } else {
       throw new AppErrors("Login ou Senha inválidos!", 400);
