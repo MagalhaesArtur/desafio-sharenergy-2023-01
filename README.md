@@ -17,7 +17,7 @@ Esse projeto conta com a utilização de várias API's e uma delas, criada por c
 
 
 Acesse a aplicação em funcionamento!
-Link: [https://feedback-widget-project.vercel.app/](https://feedback-widget-project.vercel.app/)
+Link: [https://desafio-sharenergy-8tiu.vercel.app/)
 
 ## Fotos da aplicação:
 
@@ -53,7 +53,6 @@ Link: [https://feedback-widget-project.vercel.app/](https://feedback-widget-proj
     <li>Técnicas de uso dos States para controlar funcionalidades na aplicação (front-end)</li>
     <li>Uso do Tailwind como ferramenta de produtividade, pois ela pode reduzir bastante o tempo necessário para a estilização</li>
     <li>Uso do TypeScript como ferramenta de desenvolvimento</li>
-    <li>Uso do Headless UI como ferramenta de desenvolvimento que configura muitas coisas relacionadas à acessibilidade da aplicação.</li>
     <li>Como utilizar o Prisma para aumentar a produtividade e diminuir a probabilidade de erros no desenvolvimento back-end, na parte de criação e conexão com o banco de dados</li>
    
 </ul><br><br>
