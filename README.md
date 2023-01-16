@@ -18,6 +18,8 @@ Esse projeto conta com a utilização de várias API's e uma delas, criada por c
 
 Acesse a aplicação em funcionamento!
 Link: [https://sharenergy-desafio.vercel.app/)
+<hr/>
+Video de apresentação: [https://www.youtube.com/watch?v=HsyqN-Jb1pI&ab_channel=Jo%C3%A3oArtur]
 
 ## Fotos da aplicação:
 
@@ -44,6 +46,8 @@ Link: [https://sharenergy-desafio.vercel.app/)
 ✔️ MaterialUI
 ✔️ phosphor-react
 ✔️ JWT Token
+✔️ bcrypt
+
 
 ## Como Inicializar:
 
