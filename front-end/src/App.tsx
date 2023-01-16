@@ -8,6 +8,7 @@ import { RandomUsers } from "./components/RandomUsers/RandomUsers";
 import { HTTPCodes } from "./components/HTTPCat/HTTPCodes";
 import { RandomDog } from "./components/RandomDog/RandomDog";
 import { SwitchTheme } from "./components/SwitchTheme";
+import { Register } from "./components/Register/Resgister";
 
 function App() {
   let darkMode = false;
@@ -22,7 +23,12 @@ function App() {
 
       <Router>
         <Routes>
-          <Route path="/login" element={<Login isDarkMode={isDarkMode} />} />
+          <Route
+            path="/register"
+            element={<Register isDarkMode={isDarkMode} />}
+          />
+
+          <Route path="/" element={<Login isDarkMode={isDarkMode} />} />
           <Route
             path="/clients"
             element={<Clients isDarkMode={isDarkMode} />}

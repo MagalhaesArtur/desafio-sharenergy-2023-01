@@ -41,8 +41,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
       onSubmit={handleSubmit}
     >
       <div
-        id="searchBox"
-        className="w-full gap-6 flex justify-center items-center "
+        id={`${isDarkMode ? "searchBox" : null}`}
+        className={`w-full gap-6 flex justify-center items-center  `}
       >
         <h2 className={`${isDarkMode ? "text-white" : "text-slate-800"} `}>
           Filtrar por...

@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import { GetRandomUsers } from "../../utils/randomUsersApi";
-import { Pagination } from "./Pagination";
 import { Users } from "./Users";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
-import { Loading } from "../Loading";
 import { NoUsersFound } from "./NoUsersFound";
-import { Button } from "@mui/material";
 import { NavBar } from "../NavBar";
 
 interface RandomUserProps {
@@ -37,7 +34,7 @@ export function RandomUsers(props: { isDarkMode: boolean }) {
 
       const users = await GetRandomUsers();
       if (users.message == "token inválido") {
-        navigate("/login");
+        navigate("/");
       } else {
         setRandomUsers(users);
         let indexOfLastUser = currentPage * postsPerPage;

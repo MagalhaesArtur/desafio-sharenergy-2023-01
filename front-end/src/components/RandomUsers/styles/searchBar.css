@@ -14,3 +14,7 @@
 #searchContainer label {
   color: white;
 }
+
+#searchBox input {
+  color: white !important;
+}

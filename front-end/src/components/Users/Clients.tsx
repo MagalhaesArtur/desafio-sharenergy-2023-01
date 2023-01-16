@@ -20,6 +20,8 @@ function Clients(props: { isDarkMode: boolean }) {
   const [isDialogCreateClientOpen, setIsDialogCreateClientOpen] =
     useState(false);
   const [loading, setLoading] = useState(false);
+  const [loadingDelete, setLoadingDelete] = useState(false);
+
   const [isDialogClientDataOpen, setIsDialogClientDataOpen] = useState(false);
   const [isDialogUdateDataOpen, setIsDialogUpdateDataOpen] = useState(false);
 
@@ -28,7 +30,7 @@ function Clients(props: { isDarkMode: boolean }) {
     const users = await GetUsers();
 
     if (typeof users == "string" || users.data.auth == false) {
-      navigate("/login");
+      navigate("/");
     } else {
       setClients(users.data);
       setLoading(false);
@@ -164,8 +166,10 @@ function Clients(props: { isDarkMode: boolean }) {
                   <Pen size={32} color="white" />
                 </button>
                 <button
+                  disabled={loadingDelete ? true : false}
                   title="Deletar Cliente"
                   onClick={async () => {
+                    setLoadingDelete(true);
                     // Deletando o cliente no back-end e fazendo um splice na lista de clientes
                     let index = -1;
                     const deletedUser = await DeleteUser(client.id);
@@ -179,10 +183,15 @@ function Clients(props: { isDarkMode: boolean }) {
                     }
                     clientsCopy.splice(index, 1);
                     setClients(clientsCopy);
+                    setLoadingDelete(false);
                   }}
                   className="bg-red-700 hover:bg-red-600 transition-all w-8 h-8 flex justify-center items-center rounded-md"
                 >
-                  <X color="white" size={26} />
+                  {loadingDelete ? (
+                    <Loading size={20} />
+                  ) : (
+                    <X color="white" size={26} />
+                  )}
                 </button>
               </div>
             </div>

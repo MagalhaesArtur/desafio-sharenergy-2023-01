@@ -19,7 +19,7 @@ export function HTTPCodes(props: { isDarkMode: boolean }) {
     const getUrl = async () => {
       const response = await getAuth();
       if (response.message != "ok") {
-        navigate("/login");
+        navigate("/");
         alert("Token Inválido!");
       }
       setBaseURL("https://http.cat" + "/" + currentCode);

@@ -1,16 +1,16 @@
-import { FormEvent, useState } from "react";
-import Checkbox from "@mui/material/Checkbox";
+import { Button, Checkbox, TextField } from "@mui/material";
 import { blue } from "@mui/material/colors";
-import { LoginApi } from "../../utils/api";
-import { useNavigate } from "react-router-dom";
-import { Loading } from "../Loading";
-import { Button, TextField } from "@mui/material";
 import { Globe } from "phosphor-react";
-import "./styles/login.css";
+import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { LoginApi } from "../../utils/api";
+import { RegisterUser } from "../../utils/register";
+import { Loading } from "../Loading";
+import "./styles.css";
 
-function Login(props: { isDarkMode: boolean }) {
+export function Register(props: { isDarkMode: boolean }) {
   let navigate = useNavigate();
-  const [username, setUsername] = useState("");
+  const [login, setLogin] = useState("");
   const [isLoginError, setIsLoginError] = useState(false);
   const [MessageError, setMessageError] = useState("");
   const [password, setPassword] = useState("");
@@ -19,9 +19,8 @@ function Login(props: { isDarkMode: boolean }) {
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
-
-    const res = await LoginApi(username, password, rememberMe);
-    if (typeof res == "string") {
+    const res = await RegisterUser(login, password);
+    if (res == "Login já existe!") {
       setLoading(false);
       setIsLoginError(true);
       setMessageError(res);
@@ -29,9 +28,19 @@ function Login(props: { isDarkMode: boolean }) {
         setIsLoginError(false);
       }, 4000);
     } else {
-      localStorage.setItem("token", res.token);
-      setLoading(false);
-      navigate("/randomUsers");
+      const res = await LoginApi(login, password, rememberMe);
+      if (typeof res == "string") {
+        setLoading(false);
+        setIsLoginError(true);
+        setMessageError(res);
+        setTimeout(() => {
+          setIsLoginError(false);
+        }, 4000);
+      } else {
+        localStorage.setItem("token", res.token);
+        setLoading(false);
+        navigate("/randomUsers");
+      }
     }
   }
 
@@ -39,7 +48,7 @@ function Login(props: { isDarkMode: boolean }) {
     <div className="flex justify-center items-center bg-no-repeat bg-center h-[100vh] w-[100vw]">
       <div
         id="image"
-        className="w-[60%] bg-center h-[100vh]  flex flex-col justify-center items-center  bg-solarPainel"
+        className="w-[60%] bg-center h-[100vh]  flex flex-col justify-center items-center  bg-solarPainel2"
       >
         <h1 id="title" className="text-5xl text-white font-bold ">
           Bem vindo.
@@ -88,10 +97,9 @@ function Login(props: { isDarkMode: boolean }) {
             label="Login"
             className="!text-red-700"
             type={"text"}
-            variant="outlined"
             inputProps={{ maxLength: 30 }}
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={login}
+            onChange={(e) => setLogin(e.target.value)}
             sx={{
               width: "70%",
               "& label.Mui-focused": {
@@ -172,14 +180,14 @@ function Login(props: { isDarkMode: boolean }) {
           <button
             onClick={() => {
               setLoading(true);
-              if (password == "" || username == "") {
+              if (password == "" || login == "") {
                 setLoading(false);
               }
             }}
             id="submitButton"
             type="submit"
           >
-            {loading ? <Loading size={30} /> : "Login"}
+            {loading ? <Loading size={30} /> : "Criar Conta"}
           </button>
           <footer className="mt-4">
             <h2
@@ -187,14 +195,14 @@ function Login(props: { isDarkMode: boolean }) {
                 props.isDarkMode ? "text-white" : "text-slate-800"
               }`}
             >
-              Ainda não tem uma conta?{" "}
+              Já tem uma conta?{" "}
               <a
                 className="text-blue-600 underline cursor-pointer hover:text-blue-500 transition-all"
                 onClick={() => {
-                  navigate("/register");
+                  navigate("/login");
                 }}
               >
-                Criar Conta
+                Login
               </a>
             </h2>
           </footer>
@@ -203,5 +211,3 @@ function Login(props: { isDarkMode: boolean }) {
     </div>
   );
 }
-
-export default Login;
